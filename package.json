@@ -1,0 +1,15 @@
+{
+  "name": "zyvibe-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Portfolio for Syed Moh — deployed on Cloudflare Workers at zyvibe.me",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "login": "wrangler login"
+  },
+  "devDependencies": {
+    "wrangler": "^3.90.0"
+  }
+}

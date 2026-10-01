@@ -1,0 +1,36 @@
+# Cloudflare Workers config for the zyvibe.me portfolio.
+# Deploy:  npx wrangler deploy
+# Dev:     npx wrangler dev
+# Logs:    npx wrangler tail
+
+name = "zyvibe-portfolio"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Serve ./public as static assets via env.ASSETS.
+# https://developers.cloudflare.com/workers/static-assets/
+[assets]
+directory = "./public"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+
+# Bind the custom domains. On first deploy, Cloudflare auto-provisions
+# the hostname + SSL cert, so no manual DNS record is needed when
+# custom_domain = true.
+[[routes]]
+pattern = "zyvibe.me"
+custom_domain = true
+
+[[routes]]
+pattern = "www.zyvibe.me"
+custom_domain = true
+
+[observability]
+enabled = true
+head_sampling_rate = 1
+
+# Secrets (set via `wrangler secret put <KEY>`), not committed here:
+#   RESEND_API_KEY       — lead-form email
+#   HUBSPOT_TOKEN        — optional CRM push
+#   CF_TURNSTILE_SECRET  — optional anti-spam
